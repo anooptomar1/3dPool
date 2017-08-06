@@ -14,4 +14,7 @@ class Constants {
     static let tableCenter: BallVector = BallVector(0, 0)
     static let ballRadius: CGFloat = 0.5
     static let rack_dz: CGFloat = sqrt(0.75)
+    
+    static let rackTipZ: CGFloat = -12
+    static let cueBallZ: CGFloat = 18
 }

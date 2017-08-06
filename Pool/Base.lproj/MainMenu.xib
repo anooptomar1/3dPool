@@ -681,6 +681,9 @@
                         <buttonCell key="cell" type="push" title="Hit cue ball !" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zuQ-uv-p5X">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+IA
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="hitAction:" target="z44-Lp-cgU" id="UeX-rH-zOK"/>
@@ -692,6 +695,9 @@
                         <buttonCell key="cell" type="push" title="Rack" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JnT-gc-2hD">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                         </buttonCell>
                         <connections>
                             <action selector="resetAction:" target="z44-Lp-cgU" id="LuH-YE-vI0"/>

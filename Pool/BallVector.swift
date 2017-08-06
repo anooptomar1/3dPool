@@ -14,7 +14,7 @@ class BallVector {
     private var _vector: SCNVector3
     
     init(_ x: CGFloat, _ z: CGFloat) {
-        self._vector = SCNVector3(x: x, y: 0.5, z: z)
+        self._vector = SCNVector3(x: x, y: Constants.ballRadius, z: z)
     }
     
     func vector() -> SCNVector3 {
