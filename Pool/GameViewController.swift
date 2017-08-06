@@ -88,14 +88,14 @@ class GameViewController: NSViewController {
     
     @IBAction func hitAction(_ sender: Any) {
         
-        let force = SCNVector3(x: 0, y: 0 , z: -100)
+        let force = gameView!.dirV!
+//        let force = SCNVector3(x: -10, y: 0 , z: -50)
         let position = SCNVector3(x: 0, y: 0, z: 0)
         
         ballNodes[0].physicsBody?.applyForce(force, at: position, asImpulse: true)
     }
     
     @IBAction func resetAction(_ sender: Any) {
-        
         Rack.rack(ballNodes)
     }
     
@@ -108,10 +108,10 @@ class GameViewController: NSViewController {
 //        let m = SCNMatrix4Mult(xRot, yRot)
 //        cameraNode.pivot = m
         
-                cameraNode.position = SCNVector3(x: 0, y: 13, z: 40)
+                cameraNode.position = SCNVector3(x: 0, y: 20, z: 30)
         
 //                let yRot = SCNMatrix4MakeRotation(CGFloat(Double.pi), 0, 1, 0)
-                let xRot = SCNMatrix4MakeRotation(CGFloat(Double.pi / 6), 1, 0, 0)
+                let xRot = SCNMatrix4MakeRotation(CGFloat(Double.pi / 4), 1, 0, 0)
 //
 //                let m = SCNMatrix4Mult(xRot, yRot)
                 cameraNode.pivot = xRot

@@ -15,6 +15,6 @@ class Constants {
     static let ballRadius: CGFloat = 0.5
     static let rack_dz: CGFloat = sqrt(0.75)
     
-    static let rackTipZ: CGFloat = -12
-    static let cueBallZ: CGFloat = 18
+    static let rackTipZ: CGFloat = -10
+    static let cueBallZ: CGFloat = 15
 }

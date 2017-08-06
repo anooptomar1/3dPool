@@ -12,10 +12,12 @@ class GameView: SCNView {
     
     var clickPt: NSPoint = NSPoint(x: 0, y: 0)
     
-    var cueBallNode: SCNNode?
-    var targetBallNode: SCNNode?
     var rootNode: SCNNode?
+    var cueBallNode: SCNNode?
     
+    var targetBallNode: SCNNode?
+    var dirV: SCNVector3?
+
     override func mouseDown(with theEvent: NSEvent) {
         /* Called when a mouse click occurs */
         
@@ -33,7 +35,7 @@ class GameView: SCNView {
         
         super.mouseDown(with: theEvent)
         
-//        drawCuePath()
+        drawCuePath()
     }
     
     private func drawCuePath() {
@@ -69,84 +71,19 @@ class GameView: SCNView {
             material.emission.contents = NSColor.red
             
             SCNTransaction.commit()
-            
-            
         }
         
         let v1 = cueBallNode?.position
         let v2 = targetBallNode?.position
         
-        let line = CylinderLine(targetBallNode!, v1!, v2!, 0.01, 25, NSColor.red)
-        rootNode?.addChildNode(line)
+        dirV = directionVector(v1!, v2!)
     }
     
-}
-
-class   CylinderLine: SCNNode
-{
-    init( _ parent: SCNNode,//Needed to add destination point of your line
-        _ v1: SCNVector3,//source
-        _ v2: SCNVector3,//destination
-        _ radius: CGFloat,//somes option for the cylinder
-        _ radSegmentCount: Int, //other option
-        _ color: NSColor )// color of your node object
-    {
-        super.init()
+    func directionVector(_ v1: SCNVector3, _ v2: SCNVector3) -> SCNVector3 {
+        let x = v2.x - v1.x
+        let y = v2.y - v1.y
+        let z = v2.z - v1.z
         
-        //Calcul the height of our line
-        let  height = v1.distance(receiver: v2)
-        
-        //set position to v1 coordonate
-        position = v1
-        
-        //Create the second node to draw direction vector
-        let nodeV2 = SCNNode()
-        
-        //define his position
-        nodeV2.position = v2
-        //add it to parent
-        parent.addChildNode(nodeV2)
-        
-        //Align Z axis
-        let zAlign = SCNNode()
-        zAlign.eulerAngles.x = CGFloat(M_PI_2)
-        
-        //create our cylinder
-        let cyl = SCNCylinder(radius: radius, height: CGFloat(height))
-        cyl.radialSegmentCount = radSegmentCount
-        cyl.firstMaterial?.diffuse.contents = color
-        
-        //Create node with cylinder
-        let nodeCyl = SCNNode(geometry: cyl )
-        nodeCyl.position.y = CGFloat(-height/Float(2))
-        zAlign.addChildNode(nodeCyl)
-        
-        //Add it to child
-        addChildNode(zAlign)
-        
-        //set contrainte direction to our vector
-        constraints = [SCNLookAtConstraint(target: nodeV2)]
-    }
-    
-    override init() {
-        super.init()
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-}
-
-private extension SCNVector3{
-    func distance(receiver:SCNVector3) -> Float{
-        let xd = receiver.x - self.x
-        let yd = receiver.y - self.y
-        let zd = receiver.z - self.z
-        let distance = Float(sqrt(xd * xd + yd * yd + zd * zd))
-        
-        if (distance < 0){
-            return (distance * -1)
-        } else {
-            return (distance)
-        }
+        return SCNVector3(x: x, y: y, z: z)
     }
 }

@@ -22,14 +22,14 @@ class Rack {
             
             balls[i].physicsBody?.velocity = SCNVector3(x: 0, y: 0, z: 0)
             balls[i].physicsBody?.angularVelocity = SCNVector4(x: 0, y: 0, z: 0, w: 0)
-            balls[i].eulerAngles = SCNVector3(x: deg90, y: 0, z: deg90)
+            balls[i].eulerAngles = SCNVector3(x: deg90, y: deg90 * 2, z: deg90)
         }
         
         let radius = Constants.ballRadius
         let diameter = 2 * radius
         let dz = Constants.rack_dz
         
-        balls[0].position = BallVector(0, Constants.cueBallZ).vector()
+        balls[0].position = BallVector(5, Constants.cueBallZ).vector()
         
         let tipZ = Constants.rackTipZ
         
