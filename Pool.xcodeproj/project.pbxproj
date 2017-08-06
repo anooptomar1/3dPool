@@ -77,12 +77,12 @@
 				3E23FFEC1F35A03000929E01 /* GameViewController.swift */,
 				3E2300001F35B89D00929E01 /* Constants.swift */,
 				3EFD99501F365ADB0018D32A /* Rack.swift */,
+				3EAA11641F36EDBE00319A88 /* KeyPressHandler.swift */,
 				3E23FFFB1F35B68700929E01 /* Domain */,
 				3E23FFEE1F35A03000929E01 /* art.scnassets */,
 				3E23FFF01F35A03000929E01 /* Assets.xcassets */,
 				3E23FFF21F35A03000929E01 /* MainMenu.xib */,
 				3E23FFF51F35A03000929E01 /* Info.plist */,
-				3EAA11641F36EDBE00319A88 /* KeyPressHandler.swift */,
 			);
 			path = Pool;
 			sourceTree = "<group>";
