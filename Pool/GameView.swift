@@ -73,8 +73,8 @@ class GameView: SCNView {
             SCNTransaction.commit()
         }
         
-        let v1 = cueBallNode?.position
-        let v2 = targetBallNode?.position
+        let v1 = cueBallNode?.presentation.position
+        let v2 = targetBallNode?.presentation.position
         
         dirV = directionVector(v1!, v2!)
     }
@@ -84,6 +84,49 @@ class GameView: SCNView {
         let y = v2.y - v1.y
         let z = v2.z - v1.z
         
-        return SCNVector3(x: x, y: y, z: z)
+        let dv = SCNVector3(x: x, y: y, z: z)
+//        Swift.print(v1, v2, dv)
+        
+        let mag = magnitude(dv)
+        let max: CGFloat = 25, min: CGFloat = 5
+        
+        if (mag < min) {
+            return scaleVector(dv, 2 * (min/mag))
+        }
+        return dv
+    }
+    
+    func magnitude(_ v: SCNVector3) -> CGFloat {
+        
+        let x2 = v.x * v.x
+        let y2 = v.y * v.y
+        let z2 = v.z * v.z
+        
+        let mag = sqrt(x2 + y2 + z2)
+        Swift.print("mag=", mag)
+        return mag
+    }
+    
+    func normalizeVector(_ v: SCNVector3) -> SCNVector3 {
+//        Swift.print("\nDirV", v)
+        let x = v.x
+        let z = v.z
+        let ax = abs(x)
+        let az = abs(z)
+        
+        let max = ax > az ? x : z
+        
+        let nx = x / abs(max)
+        let nz = z / abs(max)
+        
+        let nv = SCNVector3(x: nx, y: 0, z: nz)
+//        Swift.print("\nNormV", nv)
+        return nv
+    }
+    
+    func scaleVector(_ v: SCNVector3, _ factor: CGFloat) -> SCNVector3 {
+        let sv = SCNVector3(x: v.x * factor, y: 0, z: v.z * factor)
+//        Swift.print("\nScaleVector", sv)
+        return sv
     }
 }

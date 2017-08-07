@@ -63,6 +63,25 @@ class GameViewController: NSViewController {
         ambientLightNode.light!.type = .ambient
         ambientLightNode.light!.color = NSColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
+
+        
+        addVerticalWedgeForCushionAndRail(scene, "rightNearCushion", "rightNearRail", true)
+        addVerticalWedgeForCushionAndRail(scene, "rightNearCushion", "rightNearRail", false)
+        
+        addVerticalWedgeForCushionAndRail(scene, "rightFarCushion", "rightFarRail", false)
+        addVerticalWedgeForCushionAndRail(scene, "rightFarCushion", "rightFarRail", true)
+        
+        addVerticalWedgeForCushionAndRail(scene, "leftNearCushion", "leftNearRail", true)
+        addVerticalWedgeForCushionAndRail(scene, "leftNearCushion", "leftNearRail", false)
+        
+        addVerticalWedgeForCushionAndRail(scene, "leftFarCushion", "leftFarRail", false)
+        addVerticalWedgeForCushionAndRail(scene, "leftFarCushion", "leftFarRail", true)
+        
+        addHorizontalWedgeForCushionAndRail(scene, "nearCushion", "nearRail", true)
+        addHorizontalWedgeForCushionAndRail(scene, "nearCushion", "nearRail", false)
+        
+        addHorizontalWedgeForCushionAndRail(scene, "farCushion", "farRail", true)
+        addHorizontalWedgeForCushionAndRail(scene, "farCushion", "farRail", false)
         
         rackBalls()
         
@@ -70,7 +89,7 @@ class GameViewController: NSViewController {
         gameView!.scene = scene
         
         // allows the user to manipulate the camera
-//        gameView!.allowsCameraControl = true
+        gameView!.allowsCameraControl = true
         
         // show statistics such as fps and timing information
         gameView!.showsStatistics = true
@@ -88,11 +107,19 @@ class GameViewController: NSViewController {
     
     @IBAction func hitAction(_ sender: Any) {
         
-        let force = gameView!.dirV!
-//        let force = SCNVector3(x: -10, y: 0 , z: -50)
-        let position = SCNVector3(x: 0, y: 0, z: 0)
+        var dirV: SCNVector3
+        if (gameView!.dirV == nil) {
+            dirV = gameView!.directionVector((gameView!.cueBallNode?.presentation.position)!, ballNodes[9].presentation.position)
+        } else {
+            dirV = gameView!.dirV!
+        }
         
-        ballNodes[0].physicsBody?.applyForce(force, at: position, asImpulse: true)
+//        let force = SCNVector3(x: -10, y: 0 , z: -50)
+        let strikePoint = (NSApplication.shared().delegate as! AppDelegate).cueBallStrikePoint
+        print("sp", strikePoint)
+        let position = SCNVector3(x: strikePoint.x, y: strikePoint.y, z: 0)
+        
+        ballNodes[0].physicsBody?.applyForce(dirV, at: position, asImpulse: true)
     }
     
     @IBAction func resetAction(_ sender: Any) {
@@ -100,23 +127,81 @@ class GameViewController: NSViewController {
     }
     
     @IBAction func resetCameraAction(_ sender: Any) {
-//        cameraNode.position = SCNVector3(x: 0, y: 10, z: -10)
-//        
-//        let yRot = SCNMatrix4MakeRotation(CGFloat(Double.pi), 0, 1, 0)
-//        let xRot = SCNMatrix4MakeRotation(CGFloat(Double.pi / 3), -1, 0, 0)
-//        
-//        let m = SCNMatrix4Mult(xRot, yRot)
-//        cameraNode.pivot = m
-        
-                cameraNode.position = SCNVector3(x: 0, y: 20, z: 30)
-        
-//                let yRot = SCNMatrix4MakeRotation(CGFloat(Double.pi), 0, 1, 0)
-                let xRot = SCNMatrix4MakeRotation(CGFloat(Double.pi / 4), 1, 0, 0)
-//
-//                let m = SCNMatrix4Mult(xRot, yRot)
-                cameraNode.pivot = xRot
+
+        cameraNode.position = SCNVector3(x: 0, y: 20, z: 30)
+        let xRot = SCNMatrix4MakeRotation(CGFloat(Double.pi / 4), 1, 0, 0)
+        cameraNode.pivot = xRot
         
         cameraNode.camera?.xFov = 50
         cameraNode.camera?.yFov = 50
+    }
+    
+    func addVerticalWedgeForCushionAndRail(_ scene: SCNScene, _ cushionName: String, _ railName: String, _ nearSide: Bool) {
+        
+        let rail = scene.rootNode.childNode(withName: railName, recursively: true)!
+        let cushion = scene.rootNode.childNode(withName: cushionName, recursively: true)!
+        
+        let bb2 = cushion.boundingBox
+        let cl = bb2.max.z - bb2.min.z
+//        let cw = bb2.max.x - bb2.min.x
+//        let ch = bb2.max.y - bb2.min.y
+        
+        let bb = rail.boundingBox
+        let length = bb.max.z - bb.min.z
+        let width = bb.max.x - bb.min.x
+        let height = bb.max.y - bb.min.y
+        
+        let wx = rail.position.x
+        let wy = rail.position.y
+        let wz = nearSide ? rail.position.z + length / 2 : rail.position.z - length / 2
+        
+        let wedge = RailWedge.getVerticalWedge(SCNVector3(x: wx, y: wy, z: wz), width, height, (cl - length) / 2, nearSide)
+        
+        let mat = SCNMaterial()
+        mat.locksAmbientWithDiffuse = true
+        mat.diffuse.contents = NSColor(red: 0, green: 0.3, blue: 0, alpha: 1)
+//        mat.diffuse.contents = NSColor(red: 0.5, green: 0, blue: 0, alpha: 1)
+//        mat.diffuse.contents = "art.scnassets/redFelt.jpg"
+        mat.specular.contents = NSColor.green
+        mat.isDoubleSided = true
+        wedge.geometry?.firstMaterial = mat
+        
+//        wedge.geometry?.firstMaterial?.diffuse.contents = NSColor.blue
+//        wedge.geometry?.firstMaterial?.isDoubleSided = true
+        
+        scene.rootNode.addChildNode(wedge)
+    }
+    
+    func addHorizontalWedgeForCushionAndRail(_ scene: SCNScene, _ cushionName: String, _ railName: String, _ leftSide: Bool) {
+        
+        let rail = scene.rootNode.childNode(withName: railName, recursively: true)!
+        let cushion = scene.rootNode.childNode(withName: cushionName, recursively: true)!
+        
+        let bb2 = cushion.boundingBox
+//        let cl = bb2.max.z - bb2.min.z
+                let cw = bb2.max.x - bb2.min.x
+        //        let ch = bb2.max.y - bb2.min.y
+        
+        let bb = rail.boundingBox
+        let length = bb.max.z - bb.min.z
+        let width = bb.max.x - bb.min.x
+        let height = bb.max.y - bb.min.y
+        
+        let wx = leftSide ? rail.position.x - width / 2 : rail.position.x + width / 2
+        let wy = rail.position.y
+        let wz = rail.position.z
+        
+        let wedge = RailWedge.getHorizontalWedge(SCNVector3(x: wx, y: wy, z: wz), (cw - width) / 2, height, length, leftSide)
+        
+        let mat = SCNMaterial()
+        mat.locksAmbientWithDiffuse = true
+//        mat.diffuse.contents = NSColor(red: 0.7, green: 0, blue: 0, alpha: 1)
+                mat.diffuse.contents = NSColor(red: 0, green: 0.3, blue: 0, alpha: 1)
+        //        mat.diffuse.contents = "art.scnassets/redFelt.jpg"
+        mat.specular.contents = NSColor.green
+        mat.isDoubleSided = true
+        wedge.geometry?.firstMaterial = mat
+        
+        scene.rootNode.addChildNode(wedge)
     }
 }

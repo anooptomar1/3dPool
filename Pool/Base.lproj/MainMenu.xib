@@ -665,10 +665,12 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="640" height="480"/>
+            <rect key="contentRect" x="335" y="390" width="800" height="480"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <value key="minSize" type="size" width="800" height="480"/>
+            <value key="maxSize" type="size" width="800" height="480"/>
             <view key="contentView" wantsLayer="YES" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                <rect key="frame" x="0.0" y="0.0" width="800" height="480"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <sceneView wantsLayer="YES" autoenablesDefaultLighting="YES" translatesAutoresizingMaskIntoConstraints="NO" id="536" customClass="GameView" customModule="Pool" customModuleProvider="target">
@@ -676,7 +678,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </sceneView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oEp-iu-xy0" userLabel="Hit">
-                        <rect key="frame" x="318" y="13" width="102" height="32"/>
+                        <rect key="frame" x="656" y="198" width="102" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Hit cue ball !" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zuQ-uv-p5X">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -690,7 +692,7 @@ IA
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M0C-nu-dgl" userLabel="Reset">
-                        <rect key="frame" x="237" y="13" width="81" height="32"/>
+                        <rect key="frame" x="667" y="231" width="81" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Rack" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JnT-gc-2hD">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -704,7 +706,7 @@ Gw
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qYw-Ta-rvi">
-                        <rect key="frame" x="123" y="13" width="114" height="32"/>
+                        <rect key="frame" x="650" y="264" width="114" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Reset camera" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XPt-qj-9mk">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -714,17 +716,28 @@ Gw
                             <action selector="resetCameraAction:" target="z44-Lp-cgU" id="b74-eS-R2p"/>
                         </connections>
                     </button>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GZS-4T-g4t" userLabel="Cue Ball" customClass="CueBallImageView" customModule="Pool" customModuleProvider="target">
+                        <rect key="frame" x="657" y="313" width="100" height="100"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="CueBall" id="Pea-xu-IR4"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1X0-rY-yiu" userLabel="Crosshair">
+                        <rect key="frame" x="698" y="353" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Crosshair" id="CSd-RL-gtK"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="536" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="541"/>
                     <constraint firstItem="536" firstAttribute="top" secondItem="372" secondAttribute="top" id="542"/>
                     <constraint firstItem="536" firstAttribute="bottom" secondItem="372" secondAttribute="bottom" id="543"/>
-                    <constraint firstItem="536" firstAttribute="trailing" secondItem="372" secondAttribute="trailing" id="544"/>
+                    <constraint firstItem="536" firstAttribute="trailing" secondItem="372" secondAttribute="trailing" constant="-160" id="544"/>
                 </constraints>
             </view>
         </window>
         <customObject id="494" customClass="AppDelegate" customModule="Pool" customModuleProvider="target">
             <connections>
+                <outlet property="crosshair" destination="1X0-rY-yiu" id="CwK-wu-UND"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
@@ -738,4 +751,8 @@ Gw
             </connections>
         </viewController>
     </objects>
+    <resources>
+        <image name="Crosshair" width="500" height="500"/>
+        <image name="CueBall" width="1753" height="1752"/>
+    </resources>
 </document>

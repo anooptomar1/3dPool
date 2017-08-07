@@ -18,6 +18,8 @@
 		3E23FFF41F35A03000929E01 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E23FFF21F35A03000929E01 /* MainMenu.xib */; };
 		3E23FFFD1F35B69800929E01 /* Ball.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E23FFFC1F35B69800929E01 /* Ball.swift */; };
 		3E23FFFF1F35B7F900929E01 /* Balls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E23FFFE1F35B7F900929E01 /* Balls.swift */; };
+		3E62D3821F37D478005709B7 /* RailWedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E62D3811F37D478005709B7 /* RailWedge.swift */; };
+		3E62D3841F385F9D005709B7 /* CueBallImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E62D3831F385F9D005709B7 /* CueBallImageView.swift */; };
 		3EAA11651F36EDBE00319A88 /* KeyPressHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAA11641F36EDBE00319A88 /* KeyPressHandler.swift */; };
 		3EFD994F1F3659D40018D32A /* BallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFD994E1F3659D40018D32A /* BallNode.swift */; };
 		3EFD99511F365ADB0018D32A /* Rack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFD99501F365ADB0018D32A /* Rack.swift */; };
@@ -37,6 +39,8 @@
 		3E23FFF51F35A03000929E01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E23FFFC1F35B69800929E01 /* Ball.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ball.swift; sourceTree = "<group>"; };
 		3E23FFFE1F35B7F900929E01 /* Balls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balls.swift; sourceTree = "<group>"; };
+		3E62D3811F37D478005709B7 /* RailWedge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RailWedge.swift; sourceTree = "<group>"; };
+		3E62D3831F385F9D005709B7 /* CueBallImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CueBallImageView.swift; sourceTree = "<group>"; };
 		3EAA11641F36EDBE00319A88 /* KeyPressHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPressHandler.swift; sourceTree = "<group>"; };
 		3EFD994E1F3659D40018D32A /* BallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallNode.swift; sourceTree = "<group>"; };
 		3EFD99501F365ADB0018D32A /* Rack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rack.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				3E23FFEC1F35A03000929E01 /* GameViewController.swift */,
 				3E2300001F35B89D00929E01 /* Constants.swift */,
 				3EFD99501F365ADB0018D32A /* Rack.swift */,
+				3E62D3811F37D478005709B7 /* RailWedge.swift */,
+				3E62D3831F385F9D005709B7 /* CueBallImageView.swift */,
 				3EAA11641F36EDBE00319A88 /* KeyPressHandler.swift */,
 				3E23FFFB1F35B68700929E01 /* Domain */,
 				3E23FFEE1F35A03000929E01 /* art.scnassets */,
@@ -174,9 +180,11 @@
 				3E2300031F35B94F00929E01 /* BallType.swift in Sources */,
 				3E23FFFD1F35B69800929E01 /* Ball.swift in Sources */,
 				3E23FFEB1F35A03000929E01 /* GameView.swift in Sources */,
+				3E62D3841F385F9D005709B7 /* CueBallImageView.swift in Sources */,
 				3EFD994F1F3659D40018D32A /* BallNode.swift in Sources */,
 				3EFD99511F365ADB0018D32A /* Rack.swift in Sources */,
 				3E23FFFF1F35B7F900929E01 /* Balls.swift in Sources */,
+				3E62D3821F37D478005709B7 /* RailWedge.swift in Sources */,
 				3EAA11651F36EDBE00319A88 /* KeyPressHandler.swift in Sources */,
 				3E23FFED1F35A03000929E01 /* GameViewController.swift in Sources */,
 				3E2300051F35BC8A00929E01 /* BallVector.swift in Sources */,

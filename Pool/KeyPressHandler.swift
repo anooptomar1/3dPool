@@ -12,7 +12,7 @@ import SceneKit
 class KeyPressHandler {
     
     static func handle(_ event: NSEvent, _ cameraNode: SCNNode) {
-        print(event.keyCode)
+//        print(event.keyCode)
         
         let x = cameraNode.position.x
         let y = cameraNode.position.y
@@ -45,9 +45,8 @@ class KeyPressHandler {
             let nyf = yf! + 10
             cameraNode.camera?.xFov = nxf
             cameraNode.camera?.yFov = nyf
-        case 0: print(cameraNode.position)
-        print(cameraNode.camera?.xFov, cameraNode.camera?.yFov)
-        print(cameraNode.pivot)
+//        print(cameraNode.camera?.xFov, cameraNode.camera?.yFov)
+//        print(cameraNode.pivot)
         default: print("no-op")
         }
     }
